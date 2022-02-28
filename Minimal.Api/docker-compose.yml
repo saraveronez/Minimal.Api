@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  web-minimal:
+    image: minimal-api
+    build:
+      context: .
+    ports:
+       - "8000:80"
+    depends_on:
+      - "sqldata"
+
+  sqldata:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    ports:
+      - 1433:1433
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_PID: Standard
+      SA_PASSWORD: Secret@1234
+      MSSQL_AGENT_ENABLED: "true"
+
+
+
